@@ -3,11 +3,11 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "redisDeploySwitch": {
-            "defaultValue": false,
+            "defaultValue": "false",
             "metadata": {
                 "description": "Switch to deploy a redis cache or not. Note that certain versions of Moodle (e.g., 3.1) don't work well with Redis, so use this only for known well-working Moodle versions (e.g., 3.4)."
             },
-            "type": "bool"
+            "type": "string"
         },
         "httpsTermination": {
             "allowedValues": [
@@ -99,27 +99,25 @@
         },
         "mysqlPgresVcores": {
             "allowedValues": [
-                1,
-                2,
-                4,
-                8,
-                16,
-                32
+                "1",
+                "2",
+                "4",
+                "8",
+                "16",
+                "32"
             ],
             "defaultValue": 2,
             "metadata": {
                 "description": "MySql/Postgresql vCores. For Basic tier, only 1 & 2 are allowed. For GeneralPurpose tier, 2, 4, 8, 16, 32 are allowed. For MemoryOptimized, 2, 4, 8, 16 are allowed."
             },
-            "type": "int"
+            "type": "string"
         },
         "mysqlPgresStgSizeGB": {
-            "defaultValue": 125,
-            "minValue": 5,
-            "maxValue": 1024,
+            "defaultValue": "125",
             "metadata": {
                 "description": "MySql/Postgresql storage size in GB. Minimum 5GB, increase by 1GB, up to 1TB (1024 GB)"
             },
-            "type": "int"
+            "type": "string"
         },
         "mysqlPgresSkuTier": {
             "allowedValues": [
@@ -156,11 +154,11 @@
             "type": "string"
         },
         "fileServerDiskSize": {
-            "defaultValue": 100,
+            "defaultValue": "100",
             "metadata": {
                 "description": "Size per disk for gluster nodes or nfs server"
             },
-            "type": "int"
+            "type": "string"
         },
         "vNetAddressSpace": {
             "defaultValue": "172.31.0.0",
@@ -187,7 +185,7 @@
                 "parameters": {
                     "_artifactsLocation":           { "value": "[parameters('_artifactsLocation')]" },
                     "_artifactsLocationSasToken":   { "value": "[parameters('_artifactsLocationSasToken')]" },
-                    "redisDeploySwitch":            { "value": "[parameters('redisDeploySwitch')]" },
+                    "redisDeploySwitch":            { "value": "[bool(parameters('redisDeploySwitch'))]" },
                     "httpsTermination":             { "value": "[parameters('httpsTermination')]"},
                     "loadBalancerSku":              { "value": "[parameters('loadBalancerSku')]"},
                     "siteURL":                      { "value": ""},
@@ -202,15 +200,15 @@
                     "dbLogin":                      { "value": "dbadmin" },
                     "moodleDbName":                 { "value": "[parameters('moodleDbName')]" },
                     "moodleDbUser":                 { "value": "[parameters('moodleDbUser')]" },
-                    "mysqlPgresVcores":             { "value": "[parameters('mysqlPgresVcores')]" },
-                    "mysqlPgresStgSizeGB":          { "value": "[parameters('mysqlPgresStgSizeGB')]" },
+                    "mysqlPgresVcores":             { "value": "[int(parameters('mysqlPgresVcores'))]" },
+                    "mysqlPgresStgSizeGB":          { "value": "[int(parameters('mysqlPgresStgSizeGB'))]" },
                     "mysqlPgresSkuTier":            { "value": "[parameters('mysqlPgresSkuTier')]" },
                     "mysqlPgresSkuHwFamily":        { "value": "[parameters('mysqlPgresSkuHwFamily')]" },
                     "mysqlVersion":                 { "value": "[parameters('mysqlVersion')]" },
                     "postgresVersion":              { "value": "9.6" },
                     "fileServerType":               { "value": "azurefiles" },
                     "storageAccountType":           { "value": "Premium_LRS" },
-                    "fileServerDiskSize":           { "value": "[parameters('fileServerDiskSize')]" },
+                    "fileServerDiskSize":           { "value": "[int(parameters('fileServerDiskSize'))]" },
                     "searchType":                   { "value": "none" },
                     "azureSearchSku":               { "value": "basic" },
                     "vNetAddressSpace":             { "value": "[parameters('vNetAddressSpace')]"},
