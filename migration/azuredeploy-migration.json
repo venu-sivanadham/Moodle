@@ -2,20 +2,6 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "_artifactsLocation": {
-            "type": "string",
-            "metadata": {
-                "description": "The base URI where artifacts required by this template are located. When the template is deployed using the accompanying scripts, a private location in the subscription will be used and this value will be automatically generated."
-            },
-            "defaultValue": "https://raw.githubusercontent.com/venu-sivanadham/Moodle/master/"
-        },
-        "_artifactsLocationSasToken": {
-            "type": "securestring",
-            "metadata": {
-                "description": "The sasToken required to access _artifactsLocation.  When the template is deployed using the accompanying scripts, a sasToken will be automatically generated."
-            },
-            "defaultValue": ""
-        },
         "redisDeploySwitch": {
             "defaultValue": false,
             "metadata": {
@@ -46,12 +32,6 @@
             },
             "type": "string"
         },
-        "siteURL": {
-            "metadata": {
-                "description": "URL for Moodle site"
-            },
-            "type": "string"
-        },
         "moodleVersion": {
             "allowedValues": [
                 "MOODLE_39_STABLE",
@@ -69,13 +49,6 @@
             },
             "type": "string"
         },
-        "controllerVmSku": {
-            "defaultValue": "Standard_DS1_v2",
-            "metadata": {
-                "description": "VM size for the controller VM"
-            },
-            "type": "string"
-        },
         "webServerType": {
             "defaultValue": "nginx",
             "allowedValues": [
@@ -86,20 +59,6 @@
                 "description": "Web server type"
             },
             "type": "string"
-        },
-        "autoscaleVmSku": {
-            "defaultValue": "Standard_DS2_v2",
-            "metadata": {
-                "description": "VM size for autoscaled web VMs"
-            },
-            "type": "string"
-        },
-        "autoscaleVmCountMax": {
-            "defaultValue": 10,
-            "metadata": {
-                "description": "Maximum number of autoscaled web VMs"
-            },
-            "type": "int"
         },
         "phpVersion": {
             "allowedValues": [
@@ -121,13 +80,6 @@
             ],
             "metadata": {
                 "description": "Database type"
-            },
-            "type": "string"
-        },
-        "dbLogin": {
-            "defaultValue": "dbadmin",
-            "metadata": {
-                "description": "Database admin username"
             },
             "type": "string"
         },
@@ -203,48 +155,12 @@
             },
             "type": "string"
         },
-        "postgresVersion": {
-            "allowedValues": [
-                "9.5",
-                "9.6"
-            ],
-            "defaultValue": "9.6",
-            "metadata": {
-                "description": "Postgresql version"
-            },
-            "type": "string"
-        },
         "fileServerDiskSize": {
             "defaultValue": 100,
             "metadata": {
                 "description": "Size per disk for gluster nodes or nfs server"
             },
             "type": "int"
-        },
-        "searchType": {
-            "defaultValue": "none",
-            "allowedValues": [
-                "none",
-                "azure"
-            ],
-            "metadata": {
-                "description": "options of moodle global search"
-            },
-            "type": "string"
-        },
-        "azureSearchSku": {
-            "defaultValue": "basic",
-            "allowedValues": [
-                "free",
-                "basic",
-                "standard",
-                "standard2",
-                "standard3"
-            ],
-            "metadata": {
-                "description": "the search service level you want to create."
-            },
-            "type": "string"
         },
         "vNetAddressSpace": {
             "defaultValue": "172.31.0.0",
@@ -274,16 +190,16 @@
                     "redisDeploySwitch":            { "value": "[parameters('redisDeploySwitch')]" },
                     "httpsTermination":             { "value": "[parameters('httpsTermination')]"},
                     "loadBalancerSku":              { "value": "[parameters('loadBalancerSku')]"},
-                    "siteURL":                      { "value": "[parameters('siteURL')]"},
+                    "siteURL":                      { "value": ""},
                     "moodleVersion":                { "value": "[parameters('moodleVersion')]"},
                     "sshPublicKey":                 { "value": "[parameters('sshPublicKey')]" },
-                    "controllerVmSku":              { "value": "[parameters('controllerVmSku')]"},
+                    "controllerVmSku":              { "value": "Standard_DS1_v2"},
                     "webServerType":                { "value": "[parameters('webServerType')]"},
-                    "autoscaleVmSku":               { "value": "[parameters('autoscaleVmSku')]" },
-                    "autoscaleVmCountMax":          { "value": "[parameters('autoscaleVmCountMax')]" },
+                    "autoscaleVmSku":               { "value": "Standard_DS2_v2" },
+                    "autoscaleVmCountMax":          { "value": "10" },
                     "phpVersion":                   { "value": "[parameters('phpVersion')]" },
                     "dbServerType":                 { "value": "[parameters('dbServerType')]" },
-                    "dbLogin":                      { "value": "[parameters('dbLogin')]" },
+                    "dbLogin":                      { "value": "dbadmin" },
                     "moodleDbName":                 { "value": "[parameters('moodleDbName')]" },
                     "moodleDbUser":                 { "value": "[parameters('moodleDbUser')]" },
                     "mysqlPgresVcores":             { "value": "[parameters('mysqlPgresVcores')]" },
@@ -291,12 +207,12 @@
                     "mysqlPgresSkuTier":            { "value": "[parameters('mysqlPgresSkuTier')]" },
                     "mysqlPgresSkuHwFamily":        { "value": "[parameters('mysqlPgresSkuHwFamily')]" },
                     "mysqlVersion":                 { "value": "[parameters('mysqlVersion')]" },
-                    "postgresVersion":              { "value": "[parameters('postgresVersion')]" },
+                    "postgresVersion":              { "value": "9.6" },
                     "fileServerType":               { "value": "azurefiles" },
                     "storageAccountType":           { "value": "Premium_LRS" },
                     "fileServerDiskSize":           { "value": "[parameters('fileServerDiskSize')]" },
-                    "searchType":                   { "value": "[parameters('searchType')]" },
-                    "azureSearchSku":               { "value": "[parameters('azureSearchSku')]" },
+                    "searchType":                   { "value": "none" },
+                    "azureSearchSku":               { "value": "basic" },
                     "vNetAddressSpace":             { "value": "[parameters('vNetAddressSpace')]"},
                     "ubuntuVersion":                { "value": "[parameters('ubuntuVersion')]"},
                     "isMigration":                  { "value": true }
