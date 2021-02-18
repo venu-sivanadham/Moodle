@@ -175,6 +175,10 @@
             "defaultValue": "18.04-LTS"
         }
     },
+    "variables": {
+        "_artifactsLocation": "https://raw.githubusercontent.com/Azure/Moodle/master/",
+        "_artifactsLocationSasToken": ""
+    },
     "resources": [
         {
             "type": "Microsoft.Resources/deployments",
@@ -183,8 +187,8 @@
             "properties": {
                 "mode": "Incremental",
                 "parameters": {
-                    "_artifactsLocation":           { "value": "[parameters('_artifactsLocation')]" },
-                    "_artifactsLocationSasToken":   { "value": "[parameters('_artifactsLocationSasToken')]" },
+                    "_artifactsLocation":           { "value": "[variables('_artifactsLocation')]" },
+                    "_artifactsLocationSasToken":   { "value": "[variables('_artifactsLocationSasToken')]" },
                     "redisDeploySwitch":            { "value": "[bool(parameters('redisDeploySwitch'))]" },
                     "httpsTermination":             { "value": "[parameters('httpsTermination')]"},
                     "loadBalancerSku":              { "value": "[parameters('loadBalancerSku')]"},
