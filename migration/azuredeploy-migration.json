@@ -220,7 +220,7 @@
                     "isMigration":                  { "value": true }
                 },
                 "templateLink": {
-                    "uri": "[concat(parameters('_artifactsLocation'), 'azuredeploy.json', parameters('_artifactsLocationSasToken'))]"
+                    "uri": "[concat(variables('_artifactsLocation'), 'azuredeploy.json', variables('_artifactsLocationSasToken'))]"
                 }
             }
         }
