@@ -198,7 +198,7 @@
                     "controllerVmSku":              { "value": "Standard_DS1_v2"},
                     "webServerType":                { "value": "[parameters('webServerType')]"},
                     "autoscaleVmSku":               { "value": "Standard_DS2_v2" },
-                    "autoscaleVmCountMax":          { "value": "10" },
+                    "autoscaleVmCountMax":          { "value": 10 },
                     "phpVersion":                   { "value": "[parameters('phpVersion')]" },
                     "dbServerType":                 { "value": "[parameters('dbServerType')]" },
                     "dbLogin":                      { "value": "dbadmin" },
