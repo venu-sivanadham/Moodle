@@ -106,7 +106,7 @@
                 "16",
                 "32"
             ],
-            "defaultValue": 2,
+            "defaultValue": "2",
             "metadata": {
                 "description": "MySql/Postgresql vCores. For Basic tier, only 1 & 2 are allowed. For GeneralPurpose tier, 2, 4, 8, 16, 32 are allowed. For MemoryOptimized, 2, 4, 8, 16 are allowed."
             },
