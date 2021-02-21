@@ -7,6 +7,10 @@
             "metadata": {
                 "description": "Switch to deploy a redis cache or not. Note that certain versions of Moodle (e.g., 3.1) don't work well with Redis, so use this only for known well-working Moodle versions (e.g., 3.4)."
             },
+            "allowedValues": [ 
+                "true", 
+                "false" 
+            ],
             "type": "string"
         },
         "httpsTermination": {
@@ -59,6 +63,20 @@
                 "description": "Web server type"
             },
             "type": "string"
+        },
+        "autoscaleVmSku": {	
+            "defaultValue": "Standard_DS2_v2",	
+            "metadata": {	
+                "description": "VM size for autoscaled web VMs"	
+            },	
+            "type": "string"	
+        },	
+        "autoscaleVmCountMax": {	
+            "defaultValue": "10",	
+            "metadata": {	
+                "description": "Maximum number of autoscaled web VMs"	
+            },	
+            "type": "string"	
         },
         "phpVersion": {
             "allowedValues": [
@@ -197,8 +215,8 @@
                     "sshPublicKey":                 { "value": "[parameters('sshPublicKey')]" },
                     "controllerVmSku":              { "value": "Standard_DS1_v2"},
                     "webServerType":                { "value": "[parameters('webServerType')]"},
-                    "autoscaleVmSku":               { "value": "Standard_DS2_v2" },
-                    "autoscaleVmCountMax":          { "value": 10 },
+                    "autoscaleVmSku":               { "value": "[parameters('autoscaleVmSku')]" },
+                    "autoscaleVmCountMax":          { "value": "[int(parameters('autoscaleVmCountMax'))]" },
                     "phpVersion":                   { "value": "[parameters('phpVersion')]" },
                     "dbServerType":                 { "value": "[parameters('dbServerType')]" },
                     "dbLogin":                      { "value": "dbadmin" },
